@@ -37,7 +37,11 @@
                   required
                 ></v-text-field>
                 <v-spacer></v-spacer>
-                <v-select :items="gastos" label="Tipo de gasto"></v-select>
+                <v-select
+                  v-model="selectedSelect"
+                  :items="gastos"
+                  label="Tipo de gasto"
+                ></v-select>
               </v-col>
             </v-row>
             <v-row>
@@ -53,6 +57,7 @@
             <v-file-input
               accept="image/*"
               label="Agrega el comprobante del gasto"
+              @change="handlefile"
             ></v-file-input>
             <v-menu
               v-model="menu2"
@@ -81,8 +86,9 @@
               outlined
               name="input-7-4"
               label="Descripción del gasto"
-              value=""
+              v-model="descp"
             ></v-textarea>
+            <v-btn color="primary" @click="add_info"> Agregar gasto </v-btn>
           </v-container>
         </v-form>
       </v-col>
@@ -91,19 +97,25 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "user-comp",
   created() {},
   data() {
     return {
-      valid: false,
+      selectedSelect: "",
+      descp: "",
+      spent: "",
       firstname: "",
       lastname: "",
+      email: "",
+      selectedFile: null,
+      valid: false,
       nameRules: [
         (v) => !!v || "Nombre requerido.",
         (v) => v.length <= 10 || "El nombre debe tener almenos 10 caracteres.",
       ],
-      email: "",
       emailRules: [
         (v) => !!v || "E-mail es requerido",
         (v) => /.+@.+/.test(v) || "E-mail debe ser valido",
@@ -116,7 +128,25 @@ export default {
     };
   },
   props: {},
-  methods: {},
+  methods: {
+    ...mapActions(["set_gastos"]),
+    add_info() {
+      let info = {
+        firstName: this.firstname,
+        lastName: this.lastname,
+        date: this.date,
+        spent: this.spent,
+        file: this.selectedFile,
+        descp: this.descp,
+        selectedSelect: this.selectedSelect,
+      };
+      console.log(info);
+      this.set_gastos(info);
+    },
+    handlefile(file) {
+      this.selectedFile = file;
+    },
+  },
 };
 </script>
 

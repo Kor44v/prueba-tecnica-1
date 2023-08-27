@@ -15,3 +15,8 @@ export default {
   }),
 };
 </script>
+<style>
+v-app {
+  background: #e0dfdf;
+}
+</style>

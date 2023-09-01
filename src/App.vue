@@ -16,7 +16,12 @@ export default {
 };
 </script>
 <style>
-v-app {
-  background: #e0dfdf;
+#app {
+  /* Otras propiedades de estilo para el contenedor principal si es necesario */
+  background-image: url("../src/assets/assets-cached.jpg"); /* Reemplaza con la URL de tu imagen */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh; /* Ajusta esto según tus necesidades */
 }
 </style>

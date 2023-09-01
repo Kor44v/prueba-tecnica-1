@@ -1,7 +1,7 @@
 <template>
-  <v-container class="box">
+  <v-container class="box container">
     <v-row justify="center">
-      <v-col cols="6">
+      <v-col class="elevation-11 rounded-lg pa-10">
         <h3 class="text-center">Información del usuario</h3>
         <v-form v-model="valid">
           <v-container>
@@ -88,7 +88,12 @@
               label="Descripción del gasto"
               v-model="descp"
             ></v-textarea>
-            <v-btn color="primary" @click="add_info"> Agregar gasto </v-btn>
+            <div class="d-flex justify-space-between">
+              <v-btn color="primary" @click="add_info"> Agregar gasto </v-btn>
+              <v-btn color="primary" @click="$router.push('/admin')">
+                Admin
+              </v-btn>
+            </div>
           </v-container>
         </v-form>
       </v-col>
@@ -124,7 +129,7 @@ export default {
         .toISOString()
         .substr(0, 10),
       menu2: false,
-      gastos: ["Comida", "Fijos", "Extras"], //se puede agregar más gastos
+      gastos: ["Comida", "Fijos", "Extras"], //se puede agregar más tipos de gastos
     };
   },
   props: {},
@@ -134,6 +139,7 @@ export default {
       let info = {
         firstName: this.firstname,
         lastName: this.lastname,
+        email: this.email,
         date: this.date,
         spent: this.spent,
         file: this.selectedFile,
@@ -153,7 +159,9 @@ export default {
 <style scoped>
 .box {
   display: grid;
-  height: 100vh;
   align-items: center;
+}
+.container {
+  background-color: #fff;
 }
 </style>
